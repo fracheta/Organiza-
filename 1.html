@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organiza+ | Boas-vindas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-area img {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo-area h1 {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .user-greeting {
+      text-align: right;
+      font-size: 1rem;
+      color: #7f8c8d;
+    }
+
+    .user-greeting strong {
+      color: #2c3e50;
+      font-size: 1.1rem;
+    }
+
+    .welcome-banner {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .welcome-banner h2 {
+      font-size: 2rem;
+      color: #34495e;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-banner p {
+      font-size: 1.1rem;
+      color: #7f8c8d;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .module-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .module-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .module-card h3 {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-card p {
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      line-height: 1.4;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a73e8;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #b0bec5;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cabeçalho -->
+    <header>
+      <div class="logo-area">
+        <img src="logo.jpeg" alt="Logo Organiza+">
+        <h1>Organiza+</h1>
+      </div>
+      <div class="user-greeting">
+        Bem-vindo, <strong>Usuário</strong> 👋
+      </div>
+    </header>
+
+    <!-- Mensagem de boas-vindas -->
+    <div class="welcome-banner">
+      <h2>O que você deseja organizar hoje?</h2>
+      <p>Escolha um dos módulos abaixo para começar. Em breve, novos recursos estarão disponíveis.</p>
+    </div>
+
+    <!-- Módulos -->
+    <div class="modules-grid">
+      <!-- Módulo de Provas -->
+      <a href="2.html" class="module-card">
+        <div class="module-icon">📝</div>
+        <span class="badge">Principal</span>
+        <h3>Organização de Provas</h3>
+        <p>Distribua alunos em salas e carteiras, evitando colas e otimizando o espaço.</p>
+      </a>
+
+      <!-- Módulo placeholder (futuro) -->
+      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
+        <div class="module-icon">📅</div>
+        <span class="badge">Em breve</span>
+        <h3>Eventos</h3>
+        <p>Planeje cronogramas, palestras e atividades escolares.</p>
+      </div>
+
+      <!-- Módulo placeholder (futuro) -->
+      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
+        <div class="module-icon">📚</div>
+        <span class="badge">Em breve</span>
+        <h3>Biblioteca</h3>
+        <p>Controle empréstimos, devoluções e acervo de livros.</p>
+      </div>
+
+      <!-- Módulo placeholder (futuro) -->
+      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
+        <div class="module-icon">📊</div>
+        <span class="badge">Em breve</span>
+        <h3>Relatórios</h3>
+        <p>Gere estatísticas e relatórios gerenciais da sua instituição.</p>
+      </div>
+    </div>
+
+    <footer>
+      Organiza+ &copy; 2026 — Todos os direitos reservados.
+    </footer>
+  </div>
+</body>
+</html>
