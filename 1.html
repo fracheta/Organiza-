@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organiza+ | Boas-vindas</title>
   <style>
+    :root {
+      --laranja-claro: #FFB74D;   /* laranja suave */
+      --laranja-escuro: #E65100;  /* laranja forte, usado em poucos lugares */
+      --branco: #FFFFFF;
+      --cinza-claro: #F9F9F9;
+      --texto-escuro: #2C3E50;
+      --texto-medio: #7F8C8D;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,7 +22,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+      background-color: var(--branco);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -33,10 +42,11 @@
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 2rem;
-      background: white;
+      background: var(--branco);
       padding: 1rem 2rem;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #FFE0B2; /* borda laranja bem clara */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .logo-area {
@@ -52,40 +62,45 @@
 
     .logo-area h1 {
       font-size: 1.8rem;
-      color: #2c3e50;
+      color: var(--texto-escuro);
       font-weight: 700;
       letter-spacing: -0.5px;
+    }
+
+    .logo-area h1 span {
+      color: var(--laranja-escuro);
     }
 
     .user-greeting {
       text-align: right;
       font-size: 1rem;
-      color: #7f8c8d;
+      color: var(--texto-medio);
     }
 
     .user-greeting strong {
-      color: #2c3e50;
+      color: var(--laranja-escuro);
       font-size: 1.1rem;
     }
 
     .welcome-banner {
-      background: white;
+      background: var(--branco);
       border-radius: 16px;
       padding: 2rem;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #FFE0B2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       text-align: center;
     }
 
     .welcome-banner h2 {
       font-size: 2rem;
-      color: #34495e;
+      color: var(--texto-escuro);
       margin-bottom: 0.5rem;
     }
 
     .welcome-banner p {
       font-size: 1.1rem;
-      color: #7f8c8d;
+      color: var(--texto-medio);
       max-width: 600px;
       margin: 0 auto;
     }
@@ -97,11 +112,12 @@
     }
 
     .module-card {
-      background: white;
+      background: var(--branco);
       border-radius: 16px;
       padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #FFE0B2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
@@ -113,7 +129,8 @@
 
     .module-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-color: var(--laranja-claro);
     }
 
     .module-icon {
@@ -123,32 +140,38 @@
 
     .module-card h3 {
       font-size: 1.3rem;
-      color: #2c3e50;
+      color: var(--texto-escuro);
       margin-bottom: 0.5rem;
     }
 
     .module-card p {
       font-size: 0.95rem;
-      color: #7f8c8d;
+      color: var(--texto-medio);
       line-height: 1.4;
     }
 
     .badge {
       display: inline-block;
-      background: #e8f0fe;
-      color: #1a73e8;
+      background: #FFF3E0; /* laranja muito claro */
+      color: var(--laranja-escuro);
       padding: 0.25rem 0.75rem;
       border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
+      border: 1px solid #FFE0B2;
     }
 
     footer {
       margin-top: 3rem;
       text-align: center;
-      color: #b0bec5;
+      color: #B0BEC5;
       font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--laranja-escuro);
+      text-decoration: none;
     }
   </style>
 </head>
@@ -157,8 +180,8 @@
     <!-- Cabeçalho -->
     <header>
       <div class="logo-area">
-        <img src="logo.jpeg" alt="Logo Organiza+">
-        <h1>Organiza+</h1>
+        <img src="Preview.png" alt="Logo Organiza+">
+        <h1>Organiza<span>+</span></h1>
       </div>
       <div class="user-greeting">
         Bem-vindo, <strong>Usuário</strong> 👋
@@ -207,7 +230,7 @@
     </div>
 
     <footer>
-      Organiza+ &copy; 2026 — Todos os direitos reservados.
+      Organiza+ &copy; 2026 — Todos os direitos reservados. | <a href="#">Política de Privacidade</a>
     </footer>
   </div>
 </body>
