@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organiza+ | Organização de Provas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --laranja-claro: #FFB74D;
+      --laranja-escuro: #E65100;
+      --branco: #FFFFFF;
+      --cinza-claro: #F9F9F9;
+      --texto-escuro: #2C3E50;
+      --texto-medio: #7F8C8D;
+      --borda-suave: #FFE0B2;
+      --sombra: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffffff 0%, #fff8f0 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--branco);
+      padding: 1rem 1.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--borda-suave);
+      box-shadow: var(--sombra);
+      margin-bottom: 2rem;
+    }
+
+    .logo-area img {
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+
+    .back-link {
+      color: var(--laranja-escuro);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #bf4500;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: var(--texto-escuro);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitulo {
+      color: var(--texto-medio);
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--branco);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--borda-suave);
+      box-shadow: var(--sombra);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      color: var(--texto-escuro);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+      color: var(--texto-escuro);
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      background: var(--branco);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--laranja-claro);
+      box-shadow: 0 0 0 3px rgba(255, 183, 77, 0.2);
+    }
+
+    .btn {
+      background: var(--laranja-escuro);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover {
+      background: #bf4500;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--laranja-escuro);
+      border: 1px solid var(--laranja-claro);
+    }
+
+    .btn-outline:hover {
+      background: #FFF3E0;
+    }
+
+    .btn-remove {
+      background: #f8d7da;
+      color: #721c24;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--cinza-claro);
+      color: var(--texto-escuro);
+      font-weight: 600;
+    }
+
+    .results-section {
+      margin-top: 2rem;
+    }
+
+    .result-day {
+      margin-bottom: 1.5rem;
+    }
+
+    .result-day h3 {
+      color: var(--laranja-escuro);
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .logo-area img {
+        height: 45px;
+      }
+      .card {
+        padding: 1rem;
+      }
+      table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cabeçalho -->
+    <header>
+      <div class="logo-area">
+        <img src="Preview.png" alt="Logo Organiza+">
+      </div>
+      <a href="1.html" class="back-link">← Voltar</a>
+    </header>
+
+    <h1>📝 Organização de Provas</h1>
+    <p class="subtitulo">Configure salas, alunos e provas para gerar a distribuição automática.</p>
+
+    <!-- Seção 1: Salas -->
+    <div class="card">
+      <h2>🏫 Salas</h2>
+      <div class="form-group">
+        <label for="numSalas">Número de salas</label>
+        <input type="number" id="numSalas" min="1" value="10" onchange="gerarInputsSalas()">
+      </div>
+      <div id="salasContainer"></div>
+    </div>
+
+    <!-- Seção 2: Alunos -->
+    <div class="card">
+      <h2>👥 Alunos</h2>
+      <div class="form-group">
+        <label>Adicionar aluno manualmente</label>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.5rem;">
+          <input type="text" id="alunoNome" placeholder="Nome completo">
+          <input type="text" id="alunoTurma" placeholder="Turma (ex: 3A)">
+          <select id="alunoPeriodo">
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+          </select>
+          <button class="btn" onclick="adicionarAluno()">Adicionar</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="alunosLote">Ou importar em lote (um aluno por linha: Nome, Turma, Período)</label>
+        <textarea id="alunosLote" rows="5" placeholder="João Silva, 3A, Manhã&#10;Maria Souza, 3B, Tarde"></textarea>
+        <button class="btn btn-outline" onclick="importarAlunosLote()">Importar do texto</button>
+      </div>
+      <table id="alunosTable">
+        <thead>
+          <tr><th>Nome</th><th>Turma</th><th>Período</th><th>Ação</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Seção 3: Provas por turma -->
+    <div class="card">
+      <h2>📅 Provas por Turma</h2>
+      <p style="color: var(--texto-medio); font-size: 0.9rem; margin-bottom: 1rem;">
+        Para cada turma, informe as disciplinas e datas das provas. Isso determinará quais alunos serão distribuídos em cada dia.
+      </p>
+      <div class="form-group">
+        <button class="btn" onclick="adicionarLinhaProva()">+ Adicionar Prova</button>
+      </div>
+      <table id="provasTable">
+        <thead>
+          <tr><th>Turma</th><th>Disciplina</th><th>Data</th><th>Ação</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Botão de gerar -->
+    <button class="btn" style="width: 100%; padding: 0.8rem;" onclick="gerarDistribuicao()">Gerar Distribuição</button>
+
+    <!-- Resultados -->
+    <div id="resultados" class="results-section"></div>
+  </div>
+
+  <script>
+    // ============ DADOS ============
+    let alunos = [];          // { nome, turma, periodo }
+    let provas = [];          // { turma, disciplina, data }
+    let salasConfig = [];     // { numero, capacidade }
+
+    // ============ FUNÇÕES DE SALAS ============
+    function gerarInputsSalas() {
+      const num = parseInt(document.getElementById('numSalas').value) || 1;
+      const container = document.getElementById('salasContainer');
+      container.innerHTML = '';
+      salasConfig = [];
+      for (let i = 1; i <= num; i++) {
+        const div = document.createElement('div');
+        div.style.cssText = 'display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;';
+        div.innerHTML = `
+          <label style="min-width: 80px;">Sala ${i}</label>
+          <input type="number" min="1" value="30" class="capacidade" data-sala="${i}" style="max-width: 120px;">
+          <span style="color: var(--texto-medio);">carteiras</span>
+        `;
+        container.appendChild(div);
+        salasConfig.push({ numero: i, capacidade: 30 });
+      }
+      // Atualiza capacidades ao digitar
+      container.querySelectorAll('.capacidade').forEach(input => {
+        input.addEventListener('change', function() {
+          const numSala = parseInt(this.dataset.sala);
+          const cap = parseInt(this.value) || 1;
+          const sala = salasConfig.find(s => s.numero === numSala);
+          if (sala) sala.capacidade = cap;
+        });
+      });
+    }
+
+    // ============ FUNÇÕES DE ALUNOS ============
+    function adicionarAluno() {
+      const nome = document.getElementById('alunoNome').value.trim();
+      const turma = document.getElementById('alunoTurma').value.trim();
+      const periodo = document.getElementById('alunoPeriodo').value;
+      if (!nome || !turma) {
+        alert('Preencha nome e turma.');
+        return;
+      }
+      alunos.push({ nome, turma, periodo });
+      document.getElementById('alunoNome').value = '';
+      document.getElementById('alunoTurma').value = '';
+      atualizarTabelaAlunos();
+      atualizarTurmasProvas(); // para adicionar turmas novas no select de provas
+    }
+
+    function importarAlunosLote() {
+      const texto = document.getElementById('alunosLote').value.trim();
+      if (!texto) return;
+      const linhas = texto.split('\n');
+      let cont = 0;
+      linhas.forEach(linha => {
+        const partes = linha.split(',').map(p => p.trim());
+        if (partes.length >= 2) {
+          alunos.push({ nome: partes[0], turma: partes[1], periodo: partes[2] || 'Manhã' });
+          cont++;
+        }
+      });
+      document.getElementById('alunosLote').value = '';
+      atualizarTabelaAlunos();
+      atualizarTurmasProvas();
+      alert(`${cont} alunos importados com sucesso.`);
+    }
+
+    function removerAluno(index) {
+      alunos.splice(index, 1);
+      atualizarTabelaAlunos();
+      atualizarTurmasProvas();
+    }
+
+    function atualizarTabelaAlunos() {
+      const tbody = document.querySelector('#alunosTable tbody');
+      tbody.innerHTML = '';
+      alunos.forEach((aluno, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${aluno.nome}</td>
+          <td>${aluno.turma}</td>
+          <td>${aluno.periodo}</td>
+          <td><button class="btn-remove" onclick="removerAluno(${idx})">Remover</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ============ FUNÇÕES DE PROVAS ============
+    function getTurmasUnicas() {
+      const set = new Set(alunos.map(a => a.turma));
+      return Array.from(set);
+    }
+
+    function atualizarTurmasProvas() {
+      const selects = document.querySelectorAll('#provasTable tbody select.turma');
+      const turmas = getTurmasUnicas();
+      selects.forEach(select => {
+        const valorAtual = select.value;
+        select.innerHTML = '<option value="">Selecione...</option>' + turmas.map(t => `<option value="${t}" ${t===valorAtual?'selected':''}>${t}</option>`).join('');
+      });
+    }
+
+    function adicionarLinhaProva() {
+      const tbody = document.querySelector('#provasTable tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <select class="turma">
+            <option value="">Selecione...</option>
+            ${getTurmasUnicas().map(t => `<option value="${t}">${t}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="text" placeholder="Ex: Matemática" class="disciplina"></td>
+        <td><input type="date" class="data"></td>
+        <td><button class="btn-remove" onclick="this.closest('tr').remove()">Remover</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    // ============ FUNÇÃO PRINCIPAL DE DISTRIBUIÇÃO ============
+    function gerarDistribuicao() {
+      // Coletar dados das salas
+      const numSalas = parseInt(document.getElementById('numSalas').value) || 1;
+      const salas = [];
+      for (let i = 0; i < numSalas; i++) {
+        const capInput = document.querySelector(`.capacidade[data-sala="${i+1}"]`);
+        const capacidade = capInput ? parseInt(capInput.value) || 30 : 30;
+        salas.push({ numero: i+1, capacidade, ocupantes: [] });
+      }
+
+      // Coletar provas da tabela
+      provas = [];
+      document.querySelectorAll('#provasTable tbody tr').forEach(tr => {
+        const turma = tr.querySelector('.turma').value;
+        const disciplina = tr.querySelector('.disciplina').value.trim();
+        const data = tr.querySelector('.data').value;
+        if (turma && disciplina && data) {
+          provas.push({ turma, disciplina, data });
+        }
+      });
+
+      if (alunos.length === 0) {
+        alert('Cadastre pelo menos um aluno.');
+        return;
+      }
+      if (provas.length === 0) {
+        alert('Cadastre pelo menos uma prova.');
+        return;
+      }
+
+      // Agrupar provas por data
+      const datas = [...new Set(provas.map(p => p.data))].sort();
+      const resultadosHTML = [];
+
+      datas.forEach(data => {
+        // Obter turmas que têm prova nesse dia
+        const turmasDoDia = [...new Set(provas.filter(p => p.data === data).map(p => p.turma))];
+        // Alunos que fazem prova nesse dia (de turmas com prova)
+        const alunosDoDia = alunos.filter(a => turmasDoDia.includes(a.turma));
+        if (alunosDoDia.length === 0) return;
+
+        // Resetar salas
+        salas.forEach(s => s.ocupantes = []);
+
+        // Agrupar alunos por turma
+        const grupos = {};
+        alunosDoDia.forEach(aluno => {
+          if (!grupos[aluno.turma]) grupos[aluno.turma] = [];
+          grupos[aluno.turma].push(aluno);
+        });
+
+        // Para cada turma, distribuir seus alunos nas salas
+        Object.keys(grupos).forEach(turma => {
+          const alunosTurma = grupos[turma];
+          // Ordenar aleatoriamente para evitar padrões
+          alunosTurma.sort(() => Math.random() - 0.5);
+          alunosTurma.forEach(aluno => {
+            // Encontrar salas com vaga e sem aluno da mesma turma
+            const salasAptas = salas.filter(s => 
+              s.ocupantes.length < s.capacidade && 
+              !s.ocupantes.some(ocupante => ocupante.turma === turma)
+            );
+            let salaEscolhida;
+            if (salasAptas.length > 0) {
+              // Escolher a sala com menor número de ocupantes (balancear)
+              salaEscolhida = salasAptas.sort((a, b) => a.ocupantes.length - b.ocupantes.length)[0];
+            } else {
+              // Não há sala sem colega da mesma turma → escolher a com menos alunos da mesma turma e menor ocupação
+              const salasComVaga = salas.filter(s => s.ocupantes.length < s.capacidade);
+              if (salasComVaga.length === 0) {
+                alert(`Erro: não há vagas suficientes para a data ${data}. Verifique a capacidade das salas.`);
+                return;
+              }
+              // Ordenar por quantidade de colegas da mesma turma e depois por ocupação total
+              salaEscolhida = salasComVaga.sort((a, b) => {
+                const colegasA = a.ocupantes.filter(o => o.turma === turma).length;
+                const colegasB = b.ocupantes.filter(o => o.turma === turma).length;
+                if (colegasA !== colegasB) return colegasA - colegasB;
+                return a.ocupantes.length - b.ocupantes.length;
+              })[0];
+            }
+            // Alocar aluno na sala
+            const numeroCarteira = salaEscolhida.ocupantes.length + 1;
+            salaEscolhida.ocupantes.push({ ...aluno, numeroCarteira });
+          });
+        });
+
+        // Gerar HTML para esse dia
+        let htmlDia = `<div class="result-day card"><h3>📆 ${formatarData(data)}</h3>`;
+        salas.forEach(sala => {
+          if (sala.ocupantes.length > 0) {
+            htmlDia += `<h4>Sala ${sala.numero} (${sala.ocupantes.length}/${sala.capacidade})</h4>`;
+            htmlDia += `<table>
+              <thead><tr><th>Carteira</th><th>Nome</th><th>Turma</th><th>Período</th></tr></thead>
+              <tbody>`;
+            sala.ocupantes.forEach(ocupante => {
+              htmlDia += `<tr>
+                <td>${ocupante.numeroCarteira}</td>
+                <td>${ocupante.nome}</td>
+                <td>${ocupante.turma}</td>
+                <td>${ocupante.periodo}</td>
+              </tr>`;
+            });
+            htmlDia += `</tbody></table>`;
+          }
+        });
+        htmlDia += `</div>`;
+        resultadosHTML.push(htmlDia);
+      });
+
+      document.getElementById('resultados').innerHTML = resultadosHTML.join('');
+      document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function formatarData(dataISO) {
+      const partes = dataISO.split('-');
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+
+    // ============ INICIALIZAÇÃO ============
+    window.onload = function() {
+      gerarInputsSalas();
+      adicionarLinhaProva(); // adiciona uma linha inicial
+    };
+  </script>
+</body>
+</html>
