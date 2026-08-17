@@ -34,7 +34,7 @@
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 900px;
       width: 100%;
     }
 
@@ -47,11 +47,11 @@
       border-radius: 20px;
       border: 1px solid var(--borda-suave);
       box-shadow: var(--sombra);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .logo-area img {
-      height: 60px;
+      height: 50px;
       width: auto;
       display: block;
     }
@@ -61,43 +61,71 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: color 0.2s;
-    }
-
-    .back-link:hover {
-      color: #bf4500;
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--texto-escuro);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .subtitulo {
       color: var(--texto-medio);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Indicador de etapas */
+    .steps {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: 2rem;
     }
 
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem 0.5rem;
+      background: var(--branco);
+      border: 1px solid var(--borda-suave);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--texto-medio);
+      cursor: default;
+      transition: all 0.2s;
+      margin-right: 0.5rem;
+    }
+
+    .step:last-child {
+      margin-right: 0;
+    }
+
+    .step.active {
+      background: var(--laranja-escuro);
+      color: white;
+      border-color: var(--laranja-escuro);
+    }
+
+    .step.completed {
+      background: #FFF3E0;
+      color: var(--laranja-escuro);
+      border-color: var(--laranja-claro);
+    }
+
+    /* Cartões de conteúdo */
     .card {
       background: var(--branco);
       border-radius: 20px;
-      padding: 1.5rem;
+      padding: 1.8rem;
       border: 1px solid var(--borda-suave);
       box-shadow: var(--sombra);
       margin-bottom: 1.5rem;
     }
 
     .card h2 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--texto-escuro);
       margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .form-group {
@@ -132,11 +160,11 @@
       background: var(--laranja-escuro);
       color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
+      padding: 0.7rem 1.5rem;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       transition: background 0.2s, transform 0.1s;
     }
 
@@ -168,6 +196,17 @@
       font-size: 0.8rem;
     }
 
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -187,10 +226,7 @@
       font-weight: 600;
     }
 
-    .results-section {
-      margin-top: 2rem;
-    }
-
+    /* Resultado */
     .result-day {
       margin-bottom: 1.5rem;
     }
@@ -200,15 +236,13 @@
       margin-bottom: 0.5rem;
     }
 
-    @media (max-width: 768px) {
-      .logo-area img {
-        height: 45px;
+    @media (max-width: 600px) {
+      .steps {
+        flex-direction: column;
+        gap: 0.3rem;
       }
-      .card {
-        padding: 1rem;
-      }
-      table {
-        font-size: 0.8rem;
+      .step {
+        margin-right: 0;
       }
     }
   </style>
@@ -224,23 +258,35 @@
     </header>
 
     <h1>📝 Organização de Provas</h1>
-    <p class="subtitulo">Configure salas, alunos e provas para gerar a distribuição automática.</p>
+    <p class="subtitulo">Preencha cada etapa para gerar a distribuição automática.</p>
 
-    <!-- Seção 1: Salas -->
-    <div class="card">
-      <h2>🏫 Salas</h2>
+    <!-- Indicador de etapas -->
+    <div class="steps">
+      <div class="step active" id="stepSalas">1. Salas</div>
+      <div class="step" id="stepAlunos">2. Alunos</div>
+      <div class="step" id="stepProvas">3. Provas</div>
+      <div class="step" id="stepResultado">4. Resultado</div>
+    </div>
+
+    <!-- ETAPA 1: SALAS -->
+    <div class="card" id="etapaSalas">
+      <h2>🏫 Configurar Salas</h2>
       <div class="form-group">
         <label for="numSalas">Número de salas</label>
         <input type="number" id="numSalas" min="1" value="10" onchange="gerarInputsSalas()">
       </div>
       <div id="salasContainer"></div>
+      <div class="navigation">
+        <span></span>
+        <button class="btn" onclick="proximaEtapa('Salas', 'Alunos')">Próximo →</button>
+      </div>
     </div>
 
-    <!-- Seção 2: Alunos -->
-    <div class="card">
-      <h2>👥 Alunos</h2>
+    <!-- ETAPA 2: ALUNOS -->
+    <div class="card hidden" id="etapaAlunos">
+      <h2>👥 Cadastrar Alunos</h2>
       <div class="form-group">
-        <label>Adicionar aluno manualmente</label>
+        <label>Adicionar manualmente</label>
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 0.5rem;">
           <input type="text" id="alunoNome" placeholder="Nome completo">
           <input type="text" id="alunoTurma" placeholder="Turma (ex: 3A)">
@@ -249,53 +295,63 @@
             <option value="Tarde">Tarde</option>
             <option value="Noite">Noite</option>
           </select>
-          <button class="btn" onclick="adicionarAluno()">Adicionar</button>
+          <button class="btn" onclick="adicionarAluno()">+</button>
         </div>
       </div>
       <div class="form-group">
-        <label for="alunosLote">Ou importar em lote (um aluno por linha: Nome, Turma, Período)</label>
-        <textarea id="alunosLote" rows="5" placeholder="João Silva, 3A, Manhã&#10;Maria Souza, 3B, Tarde"></textarea>
+        <label for="alunosLote">Ou colar em lote (Nome, Turma, Período – um por linha)</label>
+        <textarea id="alunosLote" rows="4" placeholder="João Silva, 3A, Manhã&#10;Maria Souza, 3B, Tarde"></textarea>
         <button class="btn btn-outline" onclick="importarAlunosLote()">Importar do texto</button>
       </div>
-      <table id="alunosTable">
+      <p style="margin-bottom: 1rem;">Total de alunos cadastrados: <strong id="contadorAlunos">0</strong></p>
+      <table>
         <thead>
           <tr><th>Nome</th><th>Turma</th><th>Período</th><th>Ação</th></tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="alunosTableBody"></tbody>
       </table>
+      <div class="navigation">
+        <button class="btn btn-outline" onclick="proximaEtapa('Alunos', 'Salas')">← Voltar</button>
+        <button class="btn" onclick="proximaEtapa('Alunos', 'Provas')">Próximo →</button>
+      </div>
     </div>
 
-    <!-- Seção 3: Provas por turma -->
-    <div class="card">
-      <h2>📅 Provas por Turma</h2>
+    <!-- ETAPA 3: PROVAS -->
+    <div class="card hidden" id="etapaProvas">
+      <h2>📅 Definir Provas por Turma</h2>
       <p style="color: var(--texto-medio); font-size: 0.9rem; margin-bottom: 1rem;">
-        Para cada turma, informe as disciplinas e datas das provas. Isso determinará quais alunos serão distribuídos em cada dia.
+        Informe para cada turma as disciplinas e datas. Alunos só serão distribuídos nos dias de suas provas.
       </p>
-      <div class="form-group">
-        <button class="btn" onclick="adicionarLinhaProva()">+ Adicionar Prova</button>
-      </div>
-      <table id="provasTable">
+      <button class="btn" onclick="adicionarLinhaProva()" style="margin-bottom: 1rem;">+ Adicionar Prova</button>
+      <table>
         <thead>
           <tr><th>Turma</th><th>Disciplina</th><th>Data</th><th>Ação</th></tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="provasTableBody"></tbody>
       </table>
+      <div class="navigation">
+        <button class="btn btn-outline" onclick="proximaEtapa('Provas', 'Alunos')">← Voltar</button>
+        <button class="btn" onclick="gerarDistribuicao()">Gerar Distribuição →</button>
+      </div>
     </div>
 
-    <!-- Botão de gerar -->
-    <button class="btn" style="width: 100%; padding: 0.8rem;" onclick="gerarDistribuicao()">Gerar Distribuição</button>
-
-    <!-- Resultados -->
-    <div id="resultados" class="results-section"></div>
+    <!-- ETAPA 4: RESULTADO -->
+    <div class="card hidden" id="etapaResultado">
+      <h2>✅ Resultado da Distribuição</h2>
+      <div id="resultadosContainer"></div>
+      <div class="navigation">
+        <button class="btn btn-outline" onclick="proximaEtapa('Resultado', 'Provas')">← Voltar</button>
+        <button class="btn" onclick="window.print()">Imprimir Listas</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ============ DADOS ============
-    let alunos = [];          // { nome, turma, periodo }
-    let provas = [];          // { turma, disciplina, data }
-    let salasConfig = [];     // { numero, capacidade }
+    // ==================== VARIÁVEIS GLOBAIS ====================
+    let alunos = [];
+    let salasConfig = [];
 
-    // ============ FUNÇÕES DE SALAS ============
+    // ==================== FUNÇÕES DE SALAS ====================
     function gerarInputsSalas() {
       const num = parseInt(document.getElementById('numSalas').value) || 1;
       const container = document.getElementById('salasContainer');
@@ -310,9 +366,9 @@
           <span style="color: var(--texto-medio);">carteiras</span>
         `;
         container.appendChild(div);
-        salasConfig.push({ numero: i, capacidade: 30 });
+        salasConfig.push({ numero: i, capacidade: 30, ocupantes: [] });
       }
-      // Atualiza capacidades ao digitar
+      // Atualiza capacidades
       container.querySelectorAll('.capacidade').forEach(input => {
         input.addEventListener('change', function() {
           const numSala = parseInt(this.dataset.sala);
@@ -323,7 +379,7 @@
       });
     }
 
-    // ============ FUNÇÕES DE ALUNOS ============
+    // ==================== FUNÇÕES DE ALUNOS ====================
     function adicionarAluno() {
       const nome = document.getElementById('alunoNome').value.trim();
       const turma = document.getElementById('alunoTurma').value.trim();
@@ -336,7 +392,7 @@
       document.getElementById('alunoNome').value = '';
       document.getElementById('alunoTurma').value = '';
       atualizarTabelaAlunos();
-      atualizarTurmasProvas(); // para adicionar turmas novas no select de provas
+      atualizarSelectsProvas();
     }
 
     function importarAlunosLote() {
@@ -353,18 +409,18 @@
       });
       document.getElementById('alunosLote').value = '';
       atualizarTabelaAlunos();
-      atualizarTurmasProvas();
-      alert(`${cont} alunos importados com sucesso.`);
+      atualizarSelectsProvas();
+      alert(`${cont} alunos importados.`);
     }
 
     function removerAluno(index) {
       alunos.splice(index, 1);
       atualizarTabelaAlunos();
-      atualizarTurmasProvas();
+      atualizarSelectsProvas();
     }
 
     function atualizarTabelaAlunos() {
-      const tbody = document.querySelector('#alunosTable tbody');
+      const tbody = document.getElementById('alunosTableBody');
       tbody.innerHTML = '';
       alunos.forEach((aluno, idx) => {
         const tr = document.createElement('tr');
@@ -376,16 +432,17 @@
         `;
         tbody.appendChild(tr);
       });
+      document.getElementById('contadorAlunos').textContent = alunos.length;
     }
 
-    // ============ FUNÇÕES DE PROVAS ============
+    // ==================== FUNÇÕES DE PROVAS ====================
     function getTurmasUnicas() {
       const set = new Set(alunos.map(a => a.turma));
       return Array.from(set);
     }
 
-    function atualizarTurmasProvas() {
-      const selects = document.querySelectorAll('#provasTable tbody select.turma');
+    function atualizarSelectsProvas() {
+      const selects = document.querySelectorAll('#provasTableBody select.turma');
       const turmas = getTurmasUnicas();
       selects.forEach(select => {
         const valorAtual = select.value;
@@ -394,7 +451,7 @@
     }
 
     function adicionarLinhaProva() {
-      const tbody = document.querySelector('#provasTable tbody');
+      const tbody = document.getElementById('provasTableBody');
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>
@@ -410,20 +467,40 @@
       tbody.appendChild(tr);
     }
 
-    // ============ FUNÇÃO PRINCIPAL DE DISTRIBUIÇÃO ============
-    function gerarDistribuicao() {
-      // Coletar dados das salas
-      const numSalas = parseInt(document.getElementById('numSalas').value) || 1;
-      const salas = [];
-      for (let i = 0; i < numSalas; i++) {
-        const capInput = document.querySelector(`.capacidade[data-sala="${i+1}"]`);
-        const capacidade = capInput ? parseInt(capInput.value) || 30 : 30;
-        salas.push({ numero: i+1, capacidade, ocupantes: [] });
+    // ==================== NAVEGAÇÃO ENTRE ETAPAS ====================
+    function proximaEtapa(de, para) {
+      // Validações simples
+      if (de === 'Salas' && para === 'Alunos') {
+        if (salasConfig.length === 0) {
+          alert('Configure pelo menos uma sala.');
+          return;
+        }
       }
+      if (de === 'Alunos' && para === 'Provas') {
+        if (alunos.length === 0) {
+          alert('Cadastre pelo menos um aluno.');
+          return;
+        }
+      }
+      // Oculta etapa atual
+      document.getElementById('etapa' + de).classList.add('hidden');
+      // Exibe próxima etapa
+      document.getElementById('etapa' + para).classList.remove('hidden');
+      // Atualiza indicador
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + para).classList.add('active');
+      // Marca etapa concluída
+      document.getElementById('step' + de).classList.add('completed');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-      // Coletar provas da tabela
-      provas = [];
-      document.querySelectorAll('#provasTable tbody tr').forEach(tr => {
+    // ==================== DISTRIBUIÇÃO ====================
+    function gerarDistribuicao() {
+      // Coleta dados das salas
+      const salas = salasConfig.map(s => ({ ...s, ocupantes: [] }));
+      // Coleta provas
+      const provas = [];
+      document.querySelectorAll('#provasTableBody tr').forEach(tr => {
         const turma = tr.querySelector('.turma').value;
         const disciplina = tr.querySelector('.disciplina').value.trim();
         const data = tr.querySelector('.data').value;
@@ -432,97 +509,81 @@
         }
       });
 
-      if (alunos.length === 0) {
-        alert('Cadastre pelo menos um aluno.');
-        return;
-      }
       if (provas.length === 0) {
         alert('Cadastre pelo menos uma prova.');
         return;
       }
 
-      // Agrupar provas por data
+      // Agrupa por data
       const datas = [...new Set(provas.map(p => p.data))].sort();
       const resultadosHTML = [];
 
       datas.forEach(data => {
-        // Obter turmas que têm prova nesse dia
         const turmasDoDia = [...new Set(provas.filter(p => p.data === data).map(p => p.turma))];
-        // Alunos que fazem prova nesse dia (de turmas com prova)
         const alunosDoDia = alunos.filter(a => turmasDoDia.includes(a.turma));
         if (alunosDoDia.length === 0) return;
 
-        // Resetar salas
         salas.forEach(s => s.ocupantes = []);
 
-        // Agrupar alunos por turma
         const grupos = {};
         alunosDoDia.forEach(aluno => {
           if (!grupos[aluno.turma]) grupos[aluno.turma] = [];
           grupos[aluno.turma].push(aluno);
         });
 
-        // Para cada turma, distribuir seus alunos nas salas
         Object.keys(grupos).forEach(turma => {
-          const alunosTurma = grupos[turma];
-          // Ordenar aleatoriamente para evitar padrões
-          alunosTurma.sort(() => Math.random() - 0.5);
-          alunosTurma.forEach(aluno => {
-            // Encontrar salas com vaga e sem aluno da mesma turma
+          grupos[turma].sort(() => Math.random() - 0.5);
+          grupos[turma].forEach(aluno => {
             const salasAptas = salas.filter(s => 
               s.ocupantes.length < s.capacidade && 
-              !s.ocupantes.some(ocupante => ocupante.turma === turma)
+              !s.ocupantes.some(o => o.turma === turma)
             );
-            let salaEscolhida;
+            let sala;
             if (salasAptas.length > 0) {
-              // Escolher a sala com menor número de ocupantes (balancear)
-              salaEscolhida = salasAptas.sort((a, b) => a.ocupantes.length - b.ocupantes.length)[0];
+              sala = salasAptas.sort((a, b) => a.ocupantes.length - b.ocupantes.length)[0];
             } else {
-              // Não há sala sem colega da mesma turma → escolher a com menos alunos da mesma turma e menor ocupação
               const salasComVaga = salas.filter(s => s.ocupantes.length < s.capacidade);
               if (salasComVaga.length === 0) {
-                alert(`Erro: não há vagas suficientes para a data ${data}. Verifique a capacidade das salas.`);
+                alert(`Erro: capacidade insuficiente na data ${data}.`);
                 return;
               }
-              // Ordenar por quantidade de colegas da mesma turma e depois por ocupação total
-              salaEscolhida = salasComVaga.sort((a, b) => {
-                const colegasA = a.ocupantes.filter(o => o.turma === turma).length;
-                const colegasB = b.ocupantes.filter(o => o.turma === turma).length;
-                if (colegasA !== colegasB) return colegasA - colegasB;
+              sala = salasComVaga.sort((a, b) => {
+                const ca = a.ocupantes.filter(o => o.turma === turma).length;
+                const cb = b.ocupantes.filter(o => o.turma === turma).length;
+                if (ca !== cb) return ca - cb;
                 return a.ocupantes.length - b.ocupantes.length;
               })[0];
             }
-            // Alocar aluno na sala
-            const numeroCarteira = salaEscolhida.ocupantes.length + 1;
-            salaEscolhida.ocupantes.push({ ...aluno, numeroCarteira });
+            const numeroCarteira = sala.ocupantes.length + 1;
+            sala.ocupantes.push({ ...aluno, numeroCarteira });
           });
         });
 
-        // Gerar HTML para esse dia
-        let htmlDia = `<div class="result-day card"><h3>📆 ${formatarData(data)}</h3>`;
+        let html = `<div class="result-day"><h3>📆 ${formatarData(data)}</h3>`;
         salas.forEach(sala => {
           if (sala.ocupantes.length > 0) {
-            htmlDia += `<h4>Sala ${sala.numero} (${sala.ocupantes.length}/${sala.capacidade})</h4>`;
-            htmlDia += `<table>
+            html += `<h4>Sala ${sala.numero} (${sala.ocupantes.length}/${sala.capacidade})</h4>`;
+            html += `<table>
               <thead><tr><th>Carteira</th><th>Nome</th><th>Turma</th><th>Período</th></tr></thead>
               <tbody>`;
-            sala.ocupantes.forEach(ocupante => {
-              htmlDia += `<tr>
-                <td>${ocupante.numeroCarteira}</td>
-                <td>${ocupante.nome}</td>
-                <td>${ocupante.turma}</td>
-                <td>${ocupante.periodo}</td>
+            sala.ocupantes.forEach(ocup => {
+              html += `<tr>
+                <td>${ocup.numeroCarteira}</td>
+                <td>${ocup.nome}</td>
+                <td>${ocup.turma}</td>
+                <td>${ocup.periodo}</td>
               </tr>`;
             });
-            htmlDia += `</tbody></table>`;
+            html += `</tbody></table>`;
           }
         });
-        htmlDia += `</div>`;
-        resultadosHTML.push(htmlDia);
+        html += `</div>`;
+        resultadosHTML.push(html);
       });
 
-      document.getElementById('resultados').innerHTML = resultadosHTML.join('');
-      document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('resultadosContainer').innerHTML = resultadosHTML.join('');
+      // Vai para etapa de resultado
+      proximaEtapa('Provas', 'Resultado');
     }
 
     function formatarData(dataISO) {
@@ -530,10 +591,10 @@
       return `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
 
-    // ============ INICIALIZAÇÃO ============
+    // ==================== INICIALIZAÇÃO ====================
     window.onload = function() {
       gerarInputsSalas();
-      adicionarLinhaProva(); // adiciona uma linha inicial
+      adicionarLinhaProva();
     };
   </script>
 </body>
