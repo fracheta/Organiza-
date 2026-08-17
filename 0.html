@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abertura Responsiva</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;      /* centraliza horizontalmente */
+      align-items: center;          /* centraliza verticalmente */
+      height: 100vh;
+      overflow: hidden;            /* evita barras de rolagem com o zoom */
+    }
+
+    /* Container da logo – sobe um pouco em relação ao centro */
+    .splash {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      transform: translateY(-6vh); /* ajuste fino: -6% da altura da tela */
+    }
+
+    .splash img {
+      display: block;
+      max-width: 85%;
+      height: auto;
+      opacity: 0;
+      transform: scale(1);
+      animation: fadeZoom 4s forwards;
+    }
+
+    @keyframes fadeZoom {
+      0% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    /* Telas médias e grandes */
+    @media (min-width: 768px) {
+      .splash img {
+        max-width: 500px;
+      }
+    }
+
+    /* Dispositivos muito pequenos */
+    @media (max-width: 480px) {
+      .splash img {
+        max-width: 90%;
+      }
+    }
+  </style>
+  <script>
+    setTimeout(function() {
+      window.location.href = "1.html";
+    }, 5000);
+  </script>
+</head>
+<body>
+  <div class="splash">
+    <img src="logo.jpeg" alt="Logo de abertura">
+  </div>
+</body>
+</html>
