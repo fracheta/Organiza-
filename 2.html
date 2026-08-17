@@ -112,7 +112,6 @@
       border-color: var(--laranja-claro);
     }
 
-    /* Cartões de conteúdo */
     .card {
       background: var(--branco);
       border-radius: 20px;
@@ -226,7 +225,6 @@
       font-weight: 600;
     }
 
-    /* Resultado */
     .result-day {
       margin-bottom: 1.5rem;
     }
@@ -303,7 +301,28 @@
         <textarea id="alunosLote" rows="4" placeholder="João Silva, 3A, Manhã&#10;Maria Souza, 3B, Tarde"></textarea>
         <button class="btn btn-outline" onclick="importarAlunosLote()">Importar do texto</button>
       </div>
+      
+      <!-- NOVA OPÇÃO: ADICIONAR AUTOMATICAMENTE -->
+      <div class="form-group" style="border-top: 1px dashed #ddd; padding-top: 1rem; margin-top: 1rem;">
+        <label>Adicionar automaticamente (dados de teste)</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.5rem; align-items: end;">
+          <div>
+            <label style="font-size: 0.8rem;">Número de turmas</label>
+            <input type="number" id="autoNumTurmas" min="1" value="5">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem;">Alunos por turma</label>
+            <input type="number" id="autoAlunosPorTurma" min="1" value="20">
+          </div>
+          <button class="btn" onclick="gerarAlunosAutomaticos()">Gerar</button>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--texto-medio); margin-top: 0.5rem;">
+          Os alunos serão criados com nomes fictícios, turmas (3A, 3B, ...) e períodos variados.
+        </p>
+      </div>
+      
       <p style="margin-bottom: 1rem;">Total de alunos cadastrados: <strong id="contadorAlunos">0</strong></p>
+      <button class="btn btn-outline" onclick="limparAlunos()" style="margin-bottom: 1rem;">Limpar todos os alunos</button>
       <table>
         <thead>
           <tr><th>Nome</th><th>Turma</th><th>Período</th><th>Ação</th></tr>
@@ -368,7 +387,6 @@
         container.appendChild(div);
         salasConfig.push({ numero: i, capacidade: 30, ocupantes: [] });
       }
-      // Atualiza capacidades
       container.querySelectorAll('.capacidade').forEach(input => {
         input.addEventListener('change', function() {
           const numSala = parseInt(this.dataset.sala);
@@ -411,6 +429,46 @@
       atualizarTabelaAlunos();
       atualizarSelectsProvas();
       alert(`${cont} alunos importados.`);
+    }
+
+    function gerarAlunosAutomaticos() {
+      const numTurmas = parseInt(document.getElementById('autoNumTurmas').value) || 1;
+      const alunosPorTurma = parseInt(document.getElementById('autoAlunosPorTurma').value) || 1;
+      
+      const nomes = [
+        'Ana Silva', 'Bruno Costa', 'Carla Mendes', 'Daniel Souza', 'Elisa Lima',
+        'Felipe Rocha', 'Gabriela Alves', 'Henrique Nunes', 'Isabela Martins', 'João Pedro',
+        'Karina Ferreira', 'Lucas Oliveira', 'Mariana Santos', 'Nicolas Pereira', 'Otávio Ribeiro',
+        'Paula Carvalho', 'Rafael Barbosa', 'Sofia Cardoso', 'Thiago Gomes', 'Valentina Araújo',
+        'Yago Monteiro', 'Beatriz Ramos', 'Caio Fernandes', 'Débora Pinto', 'Eduardo Teixeira',
+        'Fernanda Correia', 'Gustavo Melo', 'Helena Castro', 'Igor Freitas', 'Júlia Barros'
+      ];
+      const periodos = ['Manhã', 'Tarde', 'Noite'];
+      
+      let gerados = 0;
+      for (let t = 1; t <= numTurmas; t++) {
+        const nomeTurma = String.fromCharCode(64 + t) + 'A'; // 1A, 2A, etc? Não, isso daria 1A, 2A... Ajustar: usar "3" + letra? Vamos usar "3" + (t) + "A"? Melhor: "Turma " + t? Usar formato simples: "3" + letra? Ex: 3A, 3B...
+        // Vamos usar "3" + String.fromCharCode(64 + t) => 3A, 3B, 3C...
+        const turma = "3" + String.fromCharCode(64 + t);
+        for (let a = 0; a < alunosPorTurma; a++) {
+          const nomeAleatorio = nomes[Math.floor(Math.random() * nomes.length)] + " " + (a + 1);
+          const periodo = periodos[Math.floor(Math.random() * periodos.length)];
+          alunos.push({ nome: nomeAleatorio, turma, periodo });
+          gerados++;
+        }
+      }
+      atualizarTabelaAlunos();
+      atualizarSelectsProvas();
+      alert(`${gerados} alunos gerados automaticamente.`);
+    }
+
+    function limparAlunos() {
+      if (alunos.length === 0) return;
+      if (confirm('Tem certeza que deseja remover todos os alunos?')) {
+        alunos = [];
+        atualizarTabelaAlunos();
+        atualizarSelectsProvas();
+      }
     }
 
     function removerAluno(index) {
@@ -469,7 +527,6 @@
 
     // ==================== NAVEGAÇÃO ENTRE ETAPAS ====================
     function proximaEtapa(de, para) {
-      // Validações simples
       if (de === 'Salas' && para === 'Alunos') {
         if (salasConfig.length === 0) {
           alert('Configure pelo menos uma sala.');
@@ -482,23 +539,17 @@
           return;
         }
       }
-      // Oculta etapa atual
       document.getElementById('etapa' + de).classList.add('hidden');
-      // Exibe próxima etapa
       document.getElementById('etapa' + para).classList.remove('hidden');
-      // Atualiza indicador
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById('step' + para).classList.add('active');
-      // Marca etapa concluída
       document.getElementById('step' + de).classList.add('completed');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // ==================== DISTRIBUIÇÃO ====================
     function gerarDistribuicao() {
-      // Coleta dados das salas
       const salas = salasConfig.map(s => ({ ...s, ocupantes: [] }));
-      // Coleta provas
       const provas = [];
       document.querySelectorAll('#provasTableBody tr').forEach(tr => {
         const turma = tr.querySelector('.turma').value;
@@ -514,7 +565,6 @@
         return;
       }
 
-      // Agrupa por data
       const datas = [...new Set(provas.map(p => p.data))].sort();
       const resultadosHTML = [];
 
@@ -582,7 +632,6 @@
       });
 
       document.getElementById('resultadosContainer').innerHTML = resultadosHTML.join('');
-      // Vai para etapa de resultado
       proximaEtapa('Provas', 'Resultado');
     }
 
