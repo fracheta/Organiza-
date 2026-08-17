@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Organiza+ | Boas-vindas</title>
-  <style>
-    :root {
-      --laranja-claro: #FFB74D;
-      --laranja-escuro: #E65100;
-      --branco: #FFFFFF;
-      --cinza-claro: #F9F9F9;
-      --texto-escuro: #2C3E50;
-      --texto-medio: #7F8C8D;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--branco);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-    }
-
-    .container {
-      max-width: 1000px;
-      width: 100%;
-    }
-
     header {
       display: flex;
       align-items: center;
@@ -56,13 +19,13 @@
     }
 
     .logo-area img {
-      height: 90px;  /* logo maior */
+      height: 120px;  /* logo bem maior */
       width: auto;
       display: block;
     }
 
     .user-greeting {
-      position: absolute; /* para manter a saudação no canto direito sem interferir na centralização */
+      position: absolute;
       right: 2rem;
       font-size: 1rem;
       color: var(--texto-medio);
@@ -71,98 +34,6 @@
     .user-greeting strong {
       color: var(--laranja-escuro);
       font-size: 1.1rem;
-    }
-
-    .welcome-banner {
-      background: var(--branco);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid #FFE0B2;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
-
-    .welcome-banner h2 {
-      font-size: 2rem;
-      color: var(--texto-escuro);
-      margin-bottom: 0.5rem;
-    }
-
-    .welcome-banner p {
-      font-size: 1.1rem;
-      color: var(--texto-medio);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .module-card {
-      background: var(--branco);
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 1px solid #FFE0B2;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .module-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      border-color: var(--laranja-claro);
-    }
-
-    .module-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .module-card h3 {
-      font-size: 1.3rem;
-      color: var(--texto-escuro);
-      margin-bottom: 0.5rem;
-    }
-
-    .module-card p {
-      font-size: 0.95rem;
-      color: var(--texto-medio);
-      line-height: 1.4;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #FFF3E0;
-      color: var(--laranja-escuro);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      border: 1px solid #FFE0B2;
-    }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: #B0BEC5;
-      font-size: 0.85rem;
-    }
-
-    footer a {
-      color: var(--laranja-escuro);
-      text-decoration: none;
     }
 
     /* Responsividade para telas menores */
@@ -177,67 +48,6 @@
         text-align: center;
       }
       .logo-area img {
-        height: 70px;
+        height: 80px;  /* logo um pouco menor no mobile */
       }
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <!-- Cabeçalho com apenas a logo -->
-    <header>
-      <div class="logo-area">
-        <img src="Preview.png" alt="Logo Organiza+">
-      </div>
-      <div class="user-greeting">
-        Bem-vindo, <strong>Usuário</strong> 👋
-      </div>
-    </header>
-
-    <!-- Mensagem de boas-vindas -->
-    <div class="welcome-banner">
-      <h2>O que você deseja organizar hoje?</h2>
-      <p>Escolha um dos módulos abaixo para começar. Em breve, novos recursos estarão disponíveis.</p>
-    </div>
-
-    <!-- Módulos -->
-    <div class="modules-grid">
-      <!-- Módulo de Provas -->
-      <a href="2.html" class="module-card">
-        <div class="module-icon">📝</div>
-        <span class="badge">Principal</span>
-        <h3>Organização de Provas</h3>
-        <p>Distribua alunos em salas e carteiras, evitando colas e otimizando o espaço.</p>
-      </a>
-
-      <!-- Módulo placeholder (futuro) -->
-      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
-        <div class="module-icon">📅</div>
-        <span class="badge">Em breve</span>
-        <h3>Eventos</h3>
-        <p>Planeje cronogramas, palestras e atividades escolares.</p>
-      </div>
-
-      <!-- Módulo placeholder (futuro) -->
-      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
-        <div class="module-icon">📚</div>
-        <span class="badge">Em breve</span>
-        <h3>Biblioteca</h3>
-        <p>Controle empréstimos, devoluções e acervo de livros.</p>
-      </div>
-
-      <!-- Módulo placeholder (futuro) -->
-      <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
-        <div class="module-icon">📊</div>
-        <span class="badge">Em breve</span>
-        <h3>Relatórios</h3>
-        <p>Gere estatísticas e relatórios gerenciais da sua instituição.</p>
-      </div>
-    </div>
-
-    <footer>
-      Organiza+ &copy; 2026 — Todos os direitos reservados. | <a href="#">Política de Privacidade</a>
-    </footer>
-  </div>
-</body>
-</html>
