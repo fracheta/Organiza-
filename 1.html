@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organiza+ | Boas-vindas</title>
-  <!-- Fonte moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -15,6 +14,7 @@
       --texto-escuro: #2C3E50;
       --texto-medio: #7F8C8D;
       --borda-suave: #FFE0B2;
+      --sombra: 0 10px 30px rgba(0, 0, 0, 0.06);
     }
 
     * {
@@ -38,16 +38,16 @@
       width: 100%;
     }
 
-    /* Cabeçalho centralizado com logo grande */
+    /* Cabeçalho com logo gigante */
     header {
       display: flex;
       justify-content: center;
       align-items: center;
       background: var(--branco);
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       border-radius: 24px;
       border: 1px solid var(--borda-suave);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--sombra);
       margin-bottom: 2rem;
     }
 
@@ -56,24 +56,28 @@
     }
 
     .logo-area img {
-      height: 180px;      /* logo bem maior */
+      height: 200px;        /* logo bem grande */
       width: auto;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
     }
 
+    /* Saudação discreta */
     .user-greeting {
       position: absolute;
       top: 2rem;
       right: 2rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--texto-medio);
       background: var(--branco);
       padding: 0.5rem 1rem;
       border-radius: 20px;
       border: 1px solid var(--borda-suave);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .user-greeting strong {
@@ -84,24 +88,25 @@
     /* Banner de boas-vindas */
     .welcome-banner {
       background: var(--branco);
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
-      margin-bottom: 2.5rem;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
       border: 1px solid var(--borda-suave);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--sombra);
       text-align: center;
+      animation: fadeInUp 0.6s ease;
     }
 
     .welcome-banner h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--texto-escuro);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.5px;
     }
 
     .welcome-banner p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--texto-medio);
       max-width: 600px;
       margin: 0 auto;
@@ -111,8 +116,8 @@
     /* Grade de módulos */
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
     }
 
     .module-card {
@@ -120,7 +125,7 @@
       border-radius: 20px;
       padding: 2rem 1.5rem;
       border: 1px solid var(--borda-suave);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--sombra);
       transition: all 0.3s ease;
       cursor: pointer;
       text-decoration: none;
@@ -134,7 +139,7 @@
 
     .module-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(230, 81, 0, 0.15);
+      box-shadow: 0 15px 35px rgba(230, 81, 0, 0.15);
       border-color: var(--laranja-claro);
     }
 
@@ -144,14 +149,14 @@
     }
 
     .module-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--texto-escuro);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .module-card p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--texto-medio);
       line-height: 1.5;
     }
@@ -160,19 +165,19 @@
       display: inline-block;
       background: #FFF3E0;
       color: var(--laranja-escuro);
-      padding: 0.35rem 0.9rem;
+      padding: 0.3rem 0.9rem;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       margin-bottom: 0.9rem;
       border: 1px solid var(--borda-suave);
     }
 
     footer {
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       text-align: center;
       color: #B0BEC5;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     footer a {
@@ -181,7 +186,7 @@
       font-weight: 500;
     }
 
-    /* Animação de entrada */
+    /* Animações */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -200,19 +205,17 @@
 
     /* Responsividade */
     @media (max-width: 768px) {
-      header {
-        padding: 1.5rem 0.5rem;
-      }
       .logo-area img {
-        height: 120px;   /* logo grande, mas menor no mobile */
+        height: 150px;
       }
       .user-greeting {
         position: static;
         margin: 1rem auto 0;
         text-align: center;
+        justify-content: center;
       }
       .welcome-banner h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
       .modules-grid {
         grid-template-columns: 1fr;
@@ -222,12 +225,12 @@
 </head>
 <body>
   <div class="container">
-    <!-- Saudação flutuante (opcional) -->
+    <!-- Saudação discreta -->
     <div class="user-greeting">
-      Bem-vindo, <strong>Usuário</strong> 👋
+      👋 Bem-vindo, <strong>Usuário</strong>
     </div>
 
-    <!-- Cabeçalho com logo centralizada -->
+    <!-- Cabeçalho com logo -->
     <header>
       <div class="logo-area">
         <img src="Preview.png" alt="Logo Organiza+">
@@ -242,7 +245,6 @@
 
     <!-- Módulos -->
     <div class="modules-grid">
-      <!-- Módulo de Provas -->
       <a href="2.html" class="module-card">
         <div class="module-icon">📝</div>
         <span class="badge">Principal</span>
@@ -250,7 +252,6 @@
         <p>Distribua alunos em salas e carteiras, evitando colas e otimizando o espaço.</p>
       </a>
 
-      <!-- Módulo placeholder (futuro) -->
       <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
         <div class="module-icon">📅</div>
         <span class="badge">Em breve</span>
@@ -258,7 +259,6 @@
         <p>Planeje cronogramas, palestras e atividades escolares.</p>
       </div>
 
-      <!-- Módulo placeholder (futuro) -->
       <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
         <div class="module-icon">📚</div>
         <span class="badge">Em breve</span>
@@ -266,7 +266,6 @@
         <p>Controle empréstimos, devoluções e acervo de livros.</p>
       </div>
 
-      <!-- Módulo placeholder (futuro) -->
       <div class="module-card" onclick="alert('Módulo em desenvolvimento!')">
         <div class="module-icon">📊</div>
         <span class="badge">Em breve</span>
